@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1634416815 source:c:\users\shaip\onedrive\desktop\sorts\main.cpp
+	<iostream>
+	<math.h>
+	<vector>
+	"MergeSort.hpp"
+	"BubbleSort.hpp"
+	"InsertionSort.hpp"
+	"SelectionSort.hpp"
+	"IntNumberGenerator.hpp"
+
+1634412012 c:\users\shaip\onedrive\desktop\sorts\mergesort.hpp
+	"ISort.hpp"
+
+1634401918 c:\users\shaip\onedrive\desktop\sorts\isort.hpp
+	<iostream>
+	<vector>
+
+1634329289 c:\users\shaip\onedrive\desktop\sorts\bubblesort.hpp
+	"ISort.hpp"
+
+1634404843 c:\users\shaip\onedrive\desktop\sorts\insertionsort.hpp
+	"ISort.hpp"
+
+1634412012 c:\users\shaip\onedrive\desktop\sorts\selectionsort.hpp
+	"ISort.hpp"
+
+1634417062 c:\users\shaip\onedrive\desktop\sorts\numbergenerator.hpp
+	"Generator.hpp"
+
+1634416426 c:\users\shaip\onedrive\desktop\sorts\generator.hpp
+
+1634419466 c:\users\shaip\onedrive\desktop\sorts\intnumbergenerator.hpp
+	"NumberGenerator.hpp"
+	<random>
+
