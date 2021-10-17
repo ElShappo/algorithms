@@ -53,7 +53,7 @@ private:
                 break;
         }
 
-        cout << "Index of the border in the 'sorted' vector: " << i << endl;
+        //cout << "Index of the border in the 'sorted' vector: " << i << endl;
 
         return i;
 
@@ -68,11 +68,11 @@ private:
 
             int border = partition(vec, lower_bound, upper_bound);
 
-            cout << "Left part of vector: " << endl;
-            this->print(vector<T>(vec.begin() + lower_bound, vec.begin() + border) ); // border is the first index which goes to second vector
+            //cout << "Left part of vector: " << endl;
+            //this->print(vector<T>(vec.begin() + lower_bound, vec.begin() + border) ); // border is the first index which goes to second vector
 
-            cout << "Right part of vector: " << endl;
-            this->print(vector<T>(vec.begin() + border, vec.begin() + upper_bound + 1) );
+            //cout << "Right part of vector: " << endl;
+            //this->print(vector<T>(vec.begin() + border, vec.begin() + upper_bound + 1) );
 
             sort(vec, 0, border-1);
             sort(vec, border, upper_bound);

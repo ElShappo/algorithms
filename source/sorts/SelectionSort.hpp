@@ -59,14 +59,14 @@ private:
 
         for (unsigned int i=0; i<vec.size(); ++i)
         {
-            this->print(vector<T>(vec.begin()+i, vec.end() ));
+            //this->print(vector<T>(vec.begin()+i, vec.end() ));
             IndexedElement pack(min(vector<T>(vec.begin()+i, vec.end() ) ) );
 
             smallest = pack.getValue();
             index = pack.getIndex();
 
-            cout << "Found min: " << smallest << endl;
-            cout << "Found it's index: " << index << endl << endl;
+            //cout << "Found min: " << smallest << endl;
+            //cout << "Found it's index: " << index << endl << endl;
 
             if (vec[index+i] != vec[i]) // we have to write [index+i] because the index containing inside of the pack is for the PART of the main vector
                 swap(vec[index+i], vec[i]);

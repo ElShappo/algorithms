@@ -38,12 +38,12 @@ private:
 
     vector<T> merge(vector<T> vec1, vector<T> vec2)
     {
-        cout << "MERGE CALLED" << endl;
-        cout << "Left array inside merge: " << endl;
-        this->print(vec1);
+        //cout << "MERGE CALLED" << endl;
+        //cout << "Left array inside merge: " << endl;
+        //this->print(vec1);
 
-        cout << "Right array inside merge: " << endl;
-        this->print(vec2);
+        //cout << "Right array inside merge: " << endl;
+        //this->print(vec2);
 
         unsigned int i = 0;
         unsigned int j = 0;
@@ -56,10 +56,10 @@ private:
         while (true)
         {
             T MIN = min(iptr, jptr);
-            cout << "MIN = " << MIN << endl;
+            //cout << "MIN = " << MIN << endl;
             res.push_back(MIN);
-            cout << "State of res: " << endl;
-            this->print(res);
+            //cout << "State of res: " << endl;
+            //this->print(res);
 
             if (iptr < jptr)
             {
@@ -92,7 +92,7 @@ private:
 
     vector<T> sort(vector<T> & vec) override
     {
-        cout << "SORT CALLED" << endl;
+        //cout << "SORT CALLED" << endl;
         Partition parts(vec);
 
         vector<T> left = parts.left();
@@ -103,10 +103,10 @@ private:
             left = sort(left);
             right = sort(right);
 
-            cout << "Sorted left part: " << endl;
-            this->print(left);
-            cout << "Sorted right part: " << endl;
-            this->print(right);
+            //cout << "Sorted left part: " << endl;
+            //this->print(left);
+            //cout << "Sorted right part: " << endl;
+            //this->print(right);
 
             return merge(left, right);
         }
