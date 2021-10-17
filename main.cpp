@@ -28,11 +28,11 @@ int main()
     //vi vec{1,2,3,4,5,6,7};
     //vi vec{5,6,7,0,1};
     //vi vec{5,6,7,0,1};
-    //vi vec{789, 11, 85, 23, 0};
+    vi vec{789, 11, 85, 23, 0};
     //vi vec{5,4,3,2,1};
     //vi vec{1,0};
     //vi vec{0};
-    vi vec{};
+    //vi vec{};
 
     int len = vec.size();
     int half = floor(len/2);
@@ -45,7 +45,6 @@ int main()
 
     print(vec);
 
-    /*
     cout << "Initial array: " << endl;
     print(vec);
 
@@ -84,8 +83,6 @@ int main()
     cout << "Result: " << endl;
     print(sorted);
 
-
-    */
 
     cout << "Quick sort section" << endl << endl;
 
