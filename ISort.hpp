@@ -6,7 +6,7 @@
 
 using namespace std;
 
-template <typename T>
+template <typename T, typename ... Ts>
 class ISort {
 
 protected:
@@ -27,7 +27,7 @@ protected:
     }
 
 public:
-    virtual vector<T> sort(vector<T> var) = 0;
+    virtual vector<T> sort(vector<T> & var,  Ts ...) = 0;
     virtual vector<T> get() {return this->res_;}
 
 };

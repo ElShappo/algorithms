@@ -3,6 +3,7 @@
 
 #include "RandomGenerator.hpp"
 #include <type_traits>
+#include <random>
 
 template <typename T>
 class UdGenerator : public RandomGenerator<T> {
@@ -22,10 +23,10 @@ public:
             std::uniform_real_distribution<> distrib(lower_bound, upper_bound);
             return distrib(gen);
         }
-        else
+        //else
             // throw RandomGeneratorException
     }
-}
+};
 
 #endif // UD_GENERATOR_HPP
 

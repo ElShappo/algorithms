@@ -49,7 +49,7 @@ private:
         return SelectionSort::IndexedElement(smallest, index);
     }
 
-    vector<T> sort(vector<T> vec) override
+    vector<T> sort(vector<T> & vec) override
     {
         if (vec.empty()) // no need to sort anything in this case
             return vec;

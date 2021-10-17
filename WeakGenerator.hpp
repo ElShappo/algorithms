@@ -11,10 +11,13 @@ public:
     {
         if (is_integral<T>::value)
         {
+            if (lower_bound > upper_bound)
+                swap(lower_bound, upper_bound);
+
             T delta = upper_bound - lower_bound;
-            return rand() % delta;
+            return rand() % delta; // from 0 to delta
         }
     }
-}
+};
 
 #endif // WEAK_GENERATOR_HPP

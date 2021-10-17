@@ -33,9 +33,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="BubbleSort.hpp" />
+		<Unit filename="FloatNumberGenerator.hpp" />
+		<Unit filename="Generator.hpp" />
+		<Unit filename="Generators.hpp" />
 		<Unit filename="ISort.hpp" />
+		<Unit filename="InsertionSort.hpp" />
 		<Unit filename="MergeSort.hpp" />
 		<Unit filename="QuickSort.hpp" />
+		<Unit filename="RandomGenerator.hpp" />
+		<Unit filename="SelectionSort.hpp" />
+		<Unit filename="UdGenerator.hpp" />
+		<Unit filename="WeakGenerator.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

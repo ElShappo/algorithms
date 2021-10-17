@@ -10,7 +10,7 @@ class BubbleSort : public ISort<T> {
 
 private:
 
-    vector<T> sort(vector<T> vec) override
+    vector<T> sort(vector<T> & vec) override
     {
         bool sorted = true;
 

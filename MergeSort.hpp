@@ -90,7 +90,7 @@ private:
     }
 
 
-    vector<T> sort(vector<T> vec) override
+    vector<T> sort(vector<T> & vec) override
     {
         cout << "SORT CALLED" << endl;
         Partition parts(vec);

@@ -2,72 +2,88 @@
 #define QUICK_SORT_HPP
 
 #include "ISort.hpp"
-#include "IntNumberGenerator.hpp"
+#include "UdGenerator.hpp"
+#include "WeakGenerator.hpp"
+#include <unistd.h>
 
 using namespace std;
 
 template <typename T>
-class QuickSort : public ISort<T> {
+class QuickSort : public ISort<T, int, int> {
 
 private:
 
-    T pivot(vector<T> vec) // get the index of the random pivot with the range of the size of the vector
+    float pivot(vector<T> vec, int lower_bound, int upper_bound) // get the index of the random pivot with the range of the size of the vector
     {
-        std::random_device rd; // obtain a random number from hardware
-        std::mt19937 gen(rd()); // seed the generator
-        std::uniform_int_distribution<> distr(0, vector.size()-1); // define the range
-
-        for(int n=0; n<40; ++n)
-            std::cout << distr(gen) << ' '; // generate numbers
-
-        return pivot;
+        return (float(vec[lower_bound])+vec[upper_bound])/2;
     }
 
-    int partition(vector<T>* vec, T pivot)
-    // to change the order of the elements in the vec so there are small elements on the left and large on the right
+    int partition(vector<T> & vec, int lower_bound, int upper_bound)
+    // sorts the vector so it now represents two halves left of which has elements < pivot and the other >= pivot
+    // then returning the index of the pivot in the 'sorted' vector
     {
-        int i = 0;
-        int j = vec.size()-1;
+        int i = lower_bound;
+        int j = upper_bound;
 
-        T iptr;
-        T jptr;
+        // cout << vec[i] << ", " << vec[j] << endl;
 
-        int border; // all indexes >= border are the right part of vector (large elements)
+        float pivot = this->pivot(vec, lower_bound, upper_bound);
 
-        for (int i=0; i<vec->size(); ++i)
+        for (i=lower_bound; i<upper_bound+1; ++i)
         {
-            if (*vec[i] >= pivot)
+            // cout << "vec[" << i << "] = " << vec[i] << endl;
+            if (vec[i] >= pivot)
             {
-                while (j > i && *vec[j] >= pivot)
-                    --j;
-
-                if (*vec[j] < pivot)
+                while (j > i && vec[j] >= pivot)
                 {
-                    swap(*vec[j], *vec[i])
+                    // cout << "vec[" << j << "] = " << vec[j] << endl;
+                    --j;
+                }
+
+                if (vec[j] < pivot)
+                {
+                    swap(vec[j], vec[i]);
                     --j;
                 }
 
                 if (i == j)
                     break;
             }
+            if (i >= j)
+                break;
         }
-        return j;
+
+        cout << "Index of the border in the 'sorted' vector: " << i << endl;
+
+        return i;
 
     }
 
-    vector<T> sort(vector<T> & vec) override
+    vector<T> sort(vector<T> & vec, int lower_bound, int upper_bound) override
     {
-        int border = partition(&vec, pivot(vec));
+        // cout << "sort function entered " << endl;
 
-        sort(vector<T>(vec.begin(), vec.begin() + border) );
-        sort(vector<T>(vec.begin() + border, vec.end() ) );
+        if (upper_bound > lower_bound && vec.size() > 1)
+        {
 
+            int border = partition(vec, lower_bound, upper_bound);
+
+            cout << "Left part of vector: " << endl;
+            this->print(vector<T>(vec.begin() + lower_bound, vec.begin() + border) ); // border is the first index which goes to second vector
+
+            cout << "Right part of vector: " << endl;
+            this->print(vector<T>(vec.begin() + border, vec.begin() + upper_bound + 1) );
+
+            sort(vec, 0, border-1);
+            sort(vec, border, upper_bound);
+
+        }
         return vec;
     }
 
 public:
 
-    QuickSort(vector<T> vec) {this->res_ = sort(vec);}
+    QuickSort(vector<T> vec) {this->res_ = sort(vec, 0, vec.size()-1);}
 };
 
 #endif // QUICK_SORT_HPP
