@@ -20,7 +20,7 @@ vector<T> bubbleSort(vector<T> vec)
 {
     //print(vec);
     BubbleSort<T> sort(vec);
-    vector<T> res = sort.get();
+    vector<T> res = get<vector<T>>(sort.get());
     //print(res);
     return res;
 }
@@ -41,22 +41,25 @@ TEST_CASE("testing bubbleSort [vector][int]", "[vector][int]")
     std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
 
     for (int i=0; i<10; ++i)
-        sample_10.push_back(gen(-100000, 100000, generator));
+    {
+        cout << gen(-10000, 10000, generator) << endl;
+        sample_10.push_back(gen(-10000, 10000, generator));
+    }
 
     for (int i=0; i<100; ++i)
-        sample_100.push_back(gen(-100000, 100000, generator));
+        sample_100.push_back(gen(-10000, 10000, generator));
 
     for (int i=0; i<1000; ++i)
         sample_1000.push_back(gen(-100000, 100000, generator));
 
     for (int i=0; i<10000; ++i)
         sample_10000.push_back(gen(-100000, 100000, generator));
-
+/*
     for (int i=0; i<100000; ++i)
         sample_100000.push_back(gen(-100000, 100000, generator));
 
     for (int i=0; i<1000000; ++i)
-        sample_1000000.push_back(gen(-100000, 100000, generator));
+        sample_1000000.push_back(gen(-100000, 100000, generator));*/
 
 
     CHECK_NOTHROW(bubbleSort(sample_10));
@@ -81,7 +84,7 @@ TEST_CASE("testing bubbleSort [vector][int]", "[vector][int]")
     BENCHMARK("bubbleSort[10000]")
     {
         return bubbleSort(sample_10000);
-    };
+    };/*
     BENCHMARK("bubbleSort[100000]")
     {
         return bubbleSort(sample_100000);
@@ -89,7 +92,7 @@ TEST_CASE("testing bubbleSort [vector][int]", "[vector][int]")
     BENCHMARK("bubbleSort[100000]")
     {
         return bubbleSort(sample_1000000);
-    };
+    };*/
 }
 
 TEST_CASE("testing bubbleSort [vector][float]", "[vector][float]")
@@ -108,10 +111,13 @@ TEST_CASE("testing bubbleSort [vector][float]", "[vector][float]")
     std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
 
     for (int i=0; i<10; ++i)
-        sample_10.push_back(gen(-100000, 100000, generator));
+    {
+        cout << gen(-10000, 10000, generator) << endl;
+        sample_10.push_back(gen(-10000, 10000, generator));
+    }
 
     for (int i=0; i<100; ++i)
-        sample_100.push_back(gen(-100000, 100000, generator));
+        sample_100.push_back(gen(-10000, 10000, generator));
 
     for (int i=0; i<1000; ++i)
         sample_1000.push_back(gen(-100000, 100000, generator));
@@ -119,11 +125,13 @@ TEST_CASE("testing bubbleSort [vector][float]", "[vector][float]")
     for (int i=0; i<10000; ++i)
         sample_10000.push_back(gen(-100000, 100000, generator));
 
+        /*
     for (int i=0; i<100000; ++i)
         sample_100000.push_back(gen(-100000, 100000, generator));
 
     for (int i=0; i<1000000; ++i)
         sample_1000000.push_back(gen(-100000, 100000, generator));
+        */
 
     CHECK_NOTHROW(bubbleSort(sample_10));
     CHECK_NOTHROW(bubbleSort(sample_100));
@@ -147,7 +155,7 @@ TEST_CASE("testing bubbleSort [vector][float]", "[vector][float]")
     BENCHMARK("bubbleSort[10000]")
     {
         return bubbleSort(sample_10000);
-    };
+    };/*
     BENCHMARK("bubbleSort[100000]")
     {
         return bubbleSort(sample_100000);
@@ -155,5 +163,5 @@ TEST_CASE("testing bubbleSort [vector][float]", "[vector][float]")
     BENCHMARK("bubbleSort[100000]")
     {
         return bubbleSort(sample_1000000);
-    };
+    };*/
 }

@@ -42,14 +42,18 @@ TEST_CASE("testing quickSort [vector][int]", "[vector][int]")
     std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
 
     for (int i=0; i<10; ++i)
+    {
+        cout << gen(-100000, 100000, generator) << endl;
         sample_10.push_back(gen(-100000, 100000, generator));
+    }
 
+    /*
     for (int i=0; i<100; ++i)
         sample_100.push_back(gen(-100000, 100000, generator));
-
+/*
     for (int i=0; i<1000; ++i)
         sample_1000.push_back(gen(-100000, 100000, generator));
-
+/*
     for (int i=0; i<10000; ++i)
         sample_10000.push_back(gen(-100000, 100000, generator));
 
@@ -58,7 +62,7 @@ TEST_CASE("testing quickSort [vector][int]", "[vector][int]")
 
     for (int i=0; i<1000000; ++i)
         sample_1000000.push_back(gen(-100000, 100000, generator));
-
+*/
 
     CHECK_NOTHROW(quickSort(sample_10));
     CHECK_NOTHROW(quickSort(sample_100));
@@ -70,15 +74,15 @@ TEST_CASE("testing quickSort [vector][int]", "[vector][int]")
     BENCHMARK("quickSort[10]")
     {
         return quickSort(sample_10);
-    };
+    };/*
     BENCHMARK("quickSort[100]")
     {
         return quickSort(sample_100);
-    };
+    };/*
     BENCHMARK("quickSort[1000]")
     {
         return quickSort(sample_1000);
-    };
+    };/*
     BENCHMARK("quickSort[10000]")
     {
         return quickSort(sample_10000);
@@ -90,9 +94,10 @@ TEST_CASE("testing quickSort [vector][int]", "[vector][int]")
     BENCHMARK("quickSort[100000]")
     {
         return quickSort(sample_1000000);
-    };
+    };*/
 }
 
+/*
 TEST_CASE("testing quickSort [vector][float]", "[vector][float]")
 {
     UdGenerator<float> gen;
@@ -157,5 +162,5 @@ TEST_CASE("testing quickSort [vector][float]", "[vector][float]")
     {
         return quickSort(sample_1000000);
     };
-}
+}*/
 

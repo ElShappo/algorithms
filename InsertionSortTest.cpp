@@ -16,7 +16,7 @@ template <typename T>
 vector<T> insertionSort(vector<T> vec)
 {
     InsertionSort<T> sort(vec);
-    vector<T> res = sort.get();
+    vector<T> res = get<vector<T>>(sort.get());
     return res;
 }
 

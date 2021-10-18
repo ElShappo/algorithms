@@ -3,6 +3,7 @@
 
 #include "LinkedListException.hpp"
 #include "DynamicArray.hpp"
+#include <list>
 
 template <class T>
 class LinkedList
@@ -10,6 +11,18 @@ class LinkedList
 public:
 
     LinkedList() {}
+
+    LinkedList(vector<T> & vec)
+    {
+        for (auto it : vec)
+            this->PushBack(it);
+    }
+
+    LinkedList(list<T> & li)
+    {
+        for (auto it : li)
+            this->PushBack(it);
+    }
 
     LinkedList(T* items, int count)
     {
@@ -75,6 +88,26 @@ public:
         return true;
     }
 
+    list<T> to_list()
+    {
+        list<T> li;
+
+        for (int i=0; i<GetLen(); ++i)
+            li.push_back(Get(i));
+
+        return li;
+    }
+
+    vector<T> to_vector()
+    {
+        vector<T> vec;
+
+        for (int i=0; i<GetLen(); ++i)
+            vec.push_back(Get(i));
+
+        return vec;
+    }
+
     void operator =(DynamicArray<T> & list)
     {
         while (!Empty() )
@@ -83,6 +116,8 @@ public:
         for (int i=0; i<list.GetLen(); ++i)
             PushBack(list[i]);
     }
+
+
 
     void Insert(T data, int index)
     {

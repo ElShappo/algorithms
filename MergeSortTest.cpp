@@ -20,7 +20,7 @@ vector<T> mergeSort(vector<T> vec)
 {
     //print(vec);
     MergeSort<T> sort(vec);
-    vector<T> res = sort.get();
+    vector<T> res = get<vector<T>>(sort.get());
     //print(res);
     return res;
 }

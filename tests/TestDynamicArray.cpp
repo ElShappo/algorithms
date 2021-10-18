@@ -1,5 +1,23 @@
 #include "catch.hpp"
 #include "DynamicArray.hpp"
+#include "UdGenerator.hpp"
+
+
+template <typename T>
+void print(DynamicArray<T> arr)
+{
+    for (int i=0; i<arr.GetLen(); ++i)
+        cout << arr[i] << endl;
+    cout << endl << endl;
+}
+
+template <typename T>
+void print(vector<T> vec)
+{
+    for (auto it : vec)
+        cout << it << endl;
+    cout << endl << endl;
+}
 
 TEST_CASE("Testing GET-method")
 {
@@ -263,3 +281,30 @@ TEST_CASE("Testing \"!=\" operator")
     CHECK(test != cmp);
 }
 
+TEST_CASE("Testing copy ctor from vector and casting to vector [DynArr]")
+{
+    UdGenerator<int> gen;
+
+    vector<int> sample_1000;
+
+    std::random_device rd;  // Will be used to obtain a seed for the random number engine
+    std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
+
+    cout << "Generated values added to vector[int] later stored in DynamicArr" << endl;
+    for (int i=0; i<100; ++i)
+    {
+        cout << gen(-100000, 100000, generator) << endl;
+        sample_1000.push_back(gen(-100000, 100000, generator));
+    }
+
+    DynamicArray<int> arr(sample_1000);
+    cout << "Values stored in DynamicArr: " << endl;
+
+    print(arr);
+    vector<int> vec(arr.to_vector());
+    //print(vec)
+
+
+    //LinkedList li(vec);
+    //print(li);
+}

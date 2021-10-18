@@ -2,6 +2,7 @@
 #define DYNAMIC_ARRAY_H
 
 #include "DynamicArrayException.hpp"
+#include <vector>
 
 using namespace std;
 
@@ -13,6 +14,12 @@ public:
     // --------------- CTORS
 
     DynamicArray() {}
+
+    DynamicArray(vector<T> & vec)
+    {
+        for (auto it : vec)
+            this->PushBack(it);
+    }
 
     DynamicArray(T* items, int len)
     {
@@ -48,6 +55,16 @@ public:
             throw DynamicArrayException<T>("IndexOutOfRange");
 
         return arr_[index];
+    }
+
+    vector<T> to_vector() const
+    {
+        vector<T> vec;
+
+        for (int i=0; i<GetLen(); ++i)
+            vec.push_back(Get(i));
+
+        return vec;
     }
 
     bool operator ==(const DynamicArray<T> & array) const

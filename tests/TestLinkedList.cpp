@@ -1,5 +1,30 @@
 #include "catch.hpp"
 #include "LinkedList.hpp"
+#include "UdGenerator.hpp"
+
+template <typename T>
+void print(DynamicArray<T> arr)
+{
+    for (int i=0; i<arr.GetLen(); ++i)
+        cout << arr[i] << endl;
+    cout << endl << endl;
+}
+
+template <typename T>
+void print(vector<T> vec)
+{
+    for (auto it : vec)
+        cout << it << endl;
+    cout << endl << endl;
+}
+
+template <typename T>
+void print(LinkedList<T> li)
+{
+    for (int i=0; i<li.GetLen(); ++i)
+        cout << li[i] << endl;
+    cout << endl << endl;
+}
 
 TEST_CASE("Testing GET-method [LinkedList]")
 {
@@ -261,41 +286,55 @@ TEST_CASE("Testing substr-method [LinkedList]")
     CHECK(test.GetLen() == size+1);
 }
 
-/*
-TEST_CASE("Testing string methods")
+TEST_CASE("Testing copy ctor from vector and casting to vector [LiLi]")
 {
-    StringArr test;
-    char buffer[6];
-    char anotherBuffer[2] = {'n', 'n'};
+    int SIZE = 100;
+    UdGenerator<int> gen;
 
-    buffer[0] = 'n'; buffer[1] = 'e'; buffer[2] = 'n'; buffer[3] = 'n'; buffer[4] = 'n'; buffer[5] = '6';
+    vector<int> sample_1000;
 
-    StringArr newTest(buffer, 6);
-    StringArr check(anotherBuffer, 2);
+    std::random_device rd;  // Will be used to obtain a seed for the random number engine
+    std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
 
-    test.push_back('h');
-    test.push_back('e');
-    test.push_back('l');
-    test.push_back('l');
-    test.push_back('o');
+    cout << "Generated values added to vector[int] later stored in LinkedList" << endl;
+    for (int i=0; i<SIZE; ++i)
+    {
+        cout << gen(-100000, 100000, generator) << endl;
+        sample_1000.push_back(gen(-100000, 100000, generator));
+    }
 
-    CHECK(test[0] == 'h');
-    CHECK(test[1] == 'e');
-    CHECK(test[2] == 'l');
-    CHECK(test[3] == 'l');
-    CHECK(test[4] == 'o');
+    LinkedList li(sample_1000);
 
-    test.pop_back();
+    cout << "Values stored in LinkedList: " << endl;
+    print(li);
 
-    StringArr substring(*test.substr(1,2));
-
-    CHECK(substring[0] == 'e');
-    CHECK(substring[1] == 'l');
-
-    CHECK_THROWS(test.substr(0, 5));
-
-    bool boolean = newTest.match(check)[0] == check;
-
-    CHECK(boolean);
+    REQUIRE(li.GetLen() == SIZE);
+    vector<int> vec(li.to_vector());
+    REQUIRE(vec.size() == SIZE);
 }
-*/
+
+TEST_CASE("Testing copy ctor from list and casting to list [LiLi]")
+{
+    int SIZE = 100;
+    UdGenerator<int> gen;
+
+    vector<int> sample_1000;
+
+    std::random_device rd;  // Will be used to obtain a seed for the random number engine
+    std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
+
+    cout << "Generated values added to vector[int] later stored in LinkedList" << endl;
+    for (int i=0; i<SIZE; ++i)
+    {
+        cout << gen(-100000, 100000, generator) << endl;
+        sample_1000.push_back(gen(-100000, 100000, generator));
+    }
+
+    LinkedList li(sample_1000);
+    REQUIRE(li.GetLen() == SIZE);
+    //print(li);
+
+    list<int> LIST(li.to_list());
+    REQUIRE(LIST.size() == SIZE);
+
+}

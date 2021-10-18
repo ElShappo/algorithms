@@ -76,7 +76,25 @@ private:
 
 public:
 
-    SelectionSort(vector<T> vec) {this->res_ = sort(vec);}
+    SelectionSort(vector<T> vec)
+    {
+        *SelectionSort::res_ = sort(vec);
+    }
+
+    SelectionSort(list<T> vec)
+    {
+        this->res_ = sort(vector<T>(begin(vec), end(vec)));
+    }
+
+    SelectionSort(DynamicArray<T> vec)
+    {
+        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
+    }
+
+    SelectionSort(LinkedList<T> vec)
+    {
+        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
+    }
 };
 
 #endif // SELECTION_SORT_HPP

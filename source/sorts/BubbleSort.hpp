@@ -34,7 +34,25 @@ private:
 
 public:
 
-    BubbleSort(vector<T> vec) {this->res_ = sort(vec);}
+    BubbleSort(vector<T> vec)
+    {
+        *BubbleSort::res_ = sort(vec);
+    }
+
+    BubbleSort(list<T> vec)
+    {
+        this->res_ = sort(vector<T>(begin(vec), end(vec)));
+    }
+
+    BubbleSort(DynamicArray<T> vec)
+    {
+        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
+    }
+
+    BubbleSort(LinkedList<T> vec)
+    {
+        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
+    }
 };
 
 #endif // BUBBLE_SORT_HPP

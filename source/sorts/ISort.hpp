@@ -3,6 +3,13 @@
 
 #include <iostream>
 #include <vector>
+#include <list>
+#include <variant>
+
+#include "DynamicArray.hpp"
+#include "LinkedList.hpp"
+
+#define myVariant variant<vector<T>, list<T>, DynamicArray<T>, LinkedList<T>>
 
 using namespace std;
 
@@ -11,7 +18,7 @@ class ISort {
 
 protected:
 
-    vector<T> res_;
+    myVariant* res_ = new myVariant();
 
     enum class Order
     {
@@ -28,7 +35,8 @@ protected:
 
 public:
     virtual vector<T> sort(vector<T> & var,  Ts ...) = 0;
-    virtual vector<T> get() {return this->res_;}
+    virtual myVariant & get() {return *res_;}
+
 
 };
 

@@ -13,6 +13,9 @@
 #define iter vector<int>::iterator
 #define vi vector<int>
 
+#include "DynamicArray.hpp"
+#include "LinkedList.hpp"
+
 using namespace std;
 
 template <typename T>
@@ -24,17 +27,27 @@ void print(vector<T> vec)
 }
 
 template <typename T>
-vector<T> bubbleSort(vector<T> vec)
+void print(DynamicArray<T> arr)
 {
-    //print(vec);
-    BubbleSort<T> sort(vec);
-    vector<T> res = sort.get();
-    //print(res);
-    return res;
+    for (int i=0; i<arr.GetLen(); ++i)
+        cout << arr[i] << endl;
+    cout << endl << endl;
 }
+
+template <typename T>
+void print(LinkedList<T> li)
+{
+    for (int i=0; i<li.GetLen(); ++i)
+        cout << li[i] << endl;
+    cout << endl << endl;
+}
+
 
 int main()
 {
+    if ((float(1)+1.0)/2 == 1)
+        cout << "yes " << endl;
+
     UdGenerator<int> gen;
 
     vector<int> sample_10;
@@ -54,12 +67,17 @@ int main()
     //vi vec{1,2,3,4,5,6,7};
     //vi vec{5,6,7,0,1};
     //vi vec{5,6,7,0,1};
-    //vi vec{789, 11, 85, 23, 0};
+    vi vec{0,789, 11, 85, 23, 0,0,0,7689, 57,56859,0, -789};
     //vi vec{5,4,3,2,1};
     //vi vec{1,0};
     //vi vec{0};
     //vi vec{};
-    vi vec{-7985, 5329, 67, 0, 1, 896, 62822, 777, 3341, 555, 279, 89, 12};
+    //vi vec{-7985, 5329, 67, 0, 1, 896, 62822, 777, 3341, 555, 279, 89, 12,2,2,0,0,0,0,0,0,678, 11, 5, 8, 8,8,83,3,1,1, 2980210, 2576, 229, 78, 0, 5,5,55,8, -976, 7};
+    //vi vec{-7985, 5329, 67, 0, 1, 896, 62822, 777, 3341, 555, 279, 89, 12,2,2,0,0,0,0,0,0,678, 11, 5, 8, 8,8,83,3,1,1, 2980210, 2576, 229, 78, 0, 5,5,55,8};
+    //vi vec{1,1};
+    //vi vec{2,1,1,1, 1,2,1,1,1,0,0};
+    //vi vec{1, 1, 3, 4};
+    //vi vec{2, 1, 3, 2, 3};
 
     /*
     int len = vec.size();
@@ -74,28 +92,27 @@ int main()
 
     print(vec);
 
+    /*
     cout << "Merge sort section" << endl;
 
     MergeSort mSort(vec);
-    sorted = mSort.get();
+    sorted = get<vector<int>>(mSort.get());
 
     cout << "Result: " << endl;
-    print(sorted);
+    print(sorted);*/
 
     cout << "Bubble sort section" << endl;
 
-    BubbleSort bSort(vec);
-    sorted = bSort.get();
+    BubbleSort<int> bSort(vec);
+    sorted = get<vector<int>>(bSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
-
-
 
     cout << "Insertion sort section" << endl;
 
     InsertionSort iSort(vec);
-    sorted = iSort.get();
+    sorted = get<vector<int>>(iSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
@@ -106,7 +123,7 @@ int main()
     cout << "Selection sort section" << endl;
 
     SelectionSort sSort(vec);
-    sorted = sSort.get();
+    sorted = get<vector<int>>(sSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
@@ -115,11 +132,18 @@ int main()
     cout << "Quick sort section" << endl << endl;
 
     QuickSort qSort(vec);
-    sorted = qSort.get();
+    sorted = get<vector<int>>(qSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
 
+
+    /*
+    DynamicArray arr(vec);
+    print(arr);
+
+    LinkedList li(vec);
+    print(li);*/
 
     return 0;
 }

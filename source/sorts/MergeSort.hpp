@@ -118,7 +118,25 @@ private:
 
 public:
 
-    MergeSort(vector<T> vec) {this->res_ = sort(vec);}
+    MergeSort(vector<T> vec)
+    {
+        *MergeSort::res_ = sort(vec);
+    }
+
+    MergeSort(list<T> vec)
+    {
+        this->res_ = sort(vector<T>(begin(vec), end(vec)));
+    }
+
+    MergeSort(DynamicArray<T> vec)
+    {
+        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
+    }
+
+    MergeSort(LinkedList<T> vec)
+    {
+        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
+    }
 };
 
 #endif // MERGE_SORT_HPP
