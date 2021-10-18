@@ -92,58 +92,84 @@ int main()
 
     print(vec);
 
-    /*
-    cout << "Merge sort section" << endl;
+    list<int> LIST(vec.begin(), vec.end());
+    DynamicArray<int> arr(vec);
+    LinkedList<int> li(vec);
 
-    MergeSort mSort(vec);
-    sorted = get<vector<int>>(mSort.get());
+    list<int> sortedLIST;
+    DynamicArray<int> sortedArr;
+    LinkedList<int> sortedLi;
 
-    cout << "Result: " << endl;
-    print(sorted);*/
+    cout << "BUBBLE SORT SECTION" << endl;
+    BubbleSort<int> bSort;
 
-    cout << "Bubble sort section" << endl;
-
-    BubbleSort<int> bSort(vec);
-    sorted = get<vector<int>>(bSort.get());
+    sorted = bSort(vec);
+    sortedLIST = bSort(LIST);
+    sortedArr = bSort(arr);
+    sortedLi = bSort(li);
 
     cout << "Result: " << endl;
     print(sorted);
 
+    //cout << "Result: " << endl;
+    //print(sortedLIST);
+
+    //cout << "Result: " << endl;
+    //print(sortedArr);
+
+    //cout << "Result: " << endl;
+    //print(sortedLi);
+
+    /*
+
     cout << "Insertion sort section" << endl;
 
-    InsertionSort iSort(vec);
+    InsertionSort<int> iSort;
+    iSort.insertionsort(vec);
     sorted = get<vector<int>>(iSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
 
-
-
-
     cout << "Selection sort section" << endl;
 
-    SelectionSort sSort(vec);
+    SelectionSort<int> sSort;
+    sSort.selectionsort(vec);
     sorted = get<vector<int>>(sSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
 
+    cout << "Merge sort section" << endl;
 
-    cout << "Quick sort section" << endl << endl;
-
-    QuickSort qSort(vec);
-    sorted = get<vector<int>>(qSort.get());
+    MergeSort<int> mSort;
+    mSort.mergesort(vec);
+    sorted = get<vector<int>>(mSort.get());
 
     cout << "Result: " << endl;
     print(sorted);
 
+    cout << "Quick sort section" << endl << endl;
 
-    /*
-    DynamicArray arr(vec);
-    print(arr);
+    QuickSort<int> qSort;
+    qSort.quicksort(vec);
+    sorted = get<vector<int>>(qSort.get());
 
-    LinkedList li(vec);
-    print(li);*/
+    cout << "Result: " << endl;
+    print(sorted);
+    */
+
+    //LinkedList
+
+
+    LinkedList<int> sample(vec);
+    bSort(sample);
+
+    //DynamicArray arr(vec);
+    //print(arr);
+
+    //LinkedList li(vec);
+    //print(li);
 
     return 0;
 }

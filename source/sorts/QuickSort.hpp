@@ -94,22 +94,22 @@ private:
 
 public:
 
-    QuickSort(vector<T> vec)
+    quicksort(vector<T> vec)
     {
         *QuickSort::res_ = sort(vec, 0, vec.size()-1);
     }
 
-    QuickSort(list<T> vec)
+    quicksort(list<T> vec)
     {
         this->res_ = sort(vector<T>(begin(vec), end(vec)), 0, vec.size()-1);
     }
 
-    QuickSort(DynamicArray<T> vec)
+    quicksort(DynamicArray<T> vec)
     {
         this->res_ = sort(get<vector<T>>(vec.to_vector() ), 0, vec.size()-1 );
     }
 
-    QuickSort(LinkedList<T> vec)
+    quicksort(LinkedList<T> vec)
     {
         this->res_ = sort(get<list<T>>(vec.to_vector() ), 0, vec.size()-1 );
     }

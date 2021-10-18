@@ -10,7 +10,7 @@ class BubbleSort : public ISort<T> {
 
 private:
 
-    vector<T> sort(vector<T> & vec) override
+    vector<T> & sort(vector<T> & vec) override
     {
         bool sorted = true;
 
@@ -34,24 +34,24 @@ private:
 
 public:
 
-    BubbleSort(vector<T> vec)
+    vector<T> & operator()(vector<T> & vec)
     {
-        *BubbleSort::res_ = sort(vec);
+        return sort(vec);
     }
 
-    BubbleSort(list<T> vec)
+    list<T> & operator()(list<T> & li)
     {
-        this->res_ = sort(vector<T>(begin(vec), end(vec)));
+        return LinkedList<T>::to_list(sort(LinkedList<T>::to_vector(li) ) );
     }
 
-    BubbleSort(DynamicArray<T> vec)
+    DynamicArray<T> & operator()(DynamicArray<T> & arr)
     {
-        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
+        return DynamicArray<T>::to_array(sort(arr.to_vector() ) );
     }
 
-    BubbleSort(LinkedList<T> vec)
+    LinkedList<T> & operator()(LinkedList<T> & li)
     {
-        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
+        return LinkedList<T>::to_linked_list(sort(li.to_vector() ) );
     }
 };
 

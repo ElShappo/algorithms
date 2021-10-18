@@ -33,22 +33,22 @@ private:
 
 public:
 
-    InsertionSort(vector<T> vec)
+    insertionsort(vector<T> vec)
     {
         *InsertionSort::res_ = sort(vec);
     }
 
-    InsertionSort(list<T> vec)
+    insertionsort(list<T> vec)
     {
         this->res_ = sort(vector<T>(begin(vec), end(vec)));
     }
 
-    InsertionSort(DynamicArray<T> vec)
+    insertionsort(DynamicArray<T> vec)
     {
         this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
     }
 
-    InsertionSort(LinkedList<T> vec)
+    insertionsort(LinkedList<T> vec)
     {
         this->res_ = sort(get<list<T>>(vec.to_vector() ) );
     }

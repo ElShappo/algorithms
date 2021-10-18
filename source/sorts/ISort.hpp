@@ -34,7 +34,7 @@ protected:
     }
 
 public:
-    virtual vector<T> sort(vector<T> & var,  Ts ...) = 0;
+    virtual vector<T> & sort(vector<T> & var,  Ts ...) = 0;
     virtual myVariant & get() {return *res_;}
 
 

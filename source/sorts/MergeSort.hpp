@@ -118,24 +118,25 @@ private:
 
 public:
 
-    MergeSort(vector<T> vec)
+    mergesort(vector<T> vec)
     {
         *MergeSort::res_ = sort(vec);
     }
 
-    MergeSort(list<T> vec)
+    mergesort(list<T> li)
     {
-        this->res_ = sort(vector<T>(begin(vec), end(vec)));
+        this->res_ = sort(vector<T>(begin(li), end(li)));
+        this->res_ = list<T>(begin(this->res_), end(this->res_));
     }
 
-    MergeSort(DynamicArray<T> vec)
+    mergesort(DynamicArray<T> arr)
     {
-        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
+        this->res_ = sort(get<vector<T>>(arr.to_vector() ) );
     }
 
-    MergeSort(LinkedList<T> vec)
+    mergesort(LinkedList<T> li)
     {
-        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
+        this->res_ = sort(get<list<T>>(li.to_vector() ) );
     }
 };
 

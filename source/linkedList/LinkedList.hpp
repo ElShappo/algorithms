@@ -88,24 +88,46 @@ public:
         return true;
     }
 
-    list<T> to_list()
+    static LinkedList<T> & to_linked_list(vector<T> vec)
     {
-        list<T> li;
+        LinkedList<T>* li = new LinkedList<T>();
 
-        for (int i=0; i<GetLen(); ++i)
-            li.push_back(Get(i));
+        for (int i=0; i<vec.size(); ++i)
+            li->PushBack(vec[i]);
 
-        return li;
+        return *li;
     }
 
-    vector<T> to_vector()
+    static list<T> & to_list(vector<T> vec)
     {
-        vector<T> vec;
+        list<T>* li = new list<T>();
+
+        for (int i=0; i<vec.size(); ++i)
+            li->push_back(vec[i]);
+
+        return *li;
+    }
+
+    vector<T> & to_vector()
+    {
+        vector<T>* vec = new vector<T>();
 
         for (int i=0; i<GetLen(); ++i)
-            vec.push_back(Get(i));
+            vec->push_back(Get(i));
 
-        return vec;
+        return *vec;
+    }
+
+    static vector<T> & to_vector(list<T> LIST)
+    {
+        LinkedList li(LIST);
+
+        vector<T>* vec = new vector<T>();
+
+        for (int i=0; i<li.GetLen(); ++i)
+            vec->push_back(li[i]);
+
+        return *vec;
     }
 
     void operator =(DynamicArray<T> & list)

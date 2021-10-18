@@ -57,14 +57,34 @@ public:
         return arr_[index];
     }
 
-    vector<T> to_vector() const
+    static DynamicArray<T> & to_array(vector<T> vec)
+    {
+        DynamicArray<T>* arr = new DynamicArray<T>();
+
+        for (auto it : vec)
+            arr->PushBack(it);
+
+        return *arr;
+    }
+
+    static vector<T> to_vector(DynamicArray<T> arr)
     {
         vector<T> vec;
 
-        for (int i=0; i<GetLen(); ++i)
-            vec.push_back(Get(i));
+        for (int i=0; i<arr.GetLen(); ++i)
+            vec.push_back(arr.Get(i));
 
         return vec;
+    }
+
+    vector<T> & to_vector() const
+    {
+        vector<T>* vec = new vector<T>();
+
+        for (int i=0; i<GetLen(); ++i)
+            vec->push_back(Get(i));
+
+        return *vec;
     }
 
     bool operator ==(const DynamicArray<T> & array) const

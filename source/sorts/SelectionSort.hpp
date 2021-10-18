@@ -76,22 +76,22 @@ private:
 
 public:
 
-    SelectionSort(vector<T> vec)
+    selectionsort(vector<T> vec)
     {
         *SelectionSort::res_ = sort(vec);
     }
 
-    SelectionSort(list<T> vec)
+    selectionsort(list<T> vec)
     {
         this->res_ = sort(vector<T>(begin(vec), end(vec)));
     }
 
-    SelectionSort(DynamicArray<T> vec)
+    selectionsort(DynamicArray<T> vec)
     {
         this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
     }
 
-    SelectionSort(LinkedList<T> vec)
+    selectionsort(LinkedList<T> vec)
     {
         this->res_ = sort(get<list<T>>(vec.to_vector() ) );
     }
