@@ -120,56 +120,49 @@ int main()
     //cout << "Result: " << endl;
     //print(sortedLi);
 
-    /*
-
     cout << "Insertion sort section" << endl;
-
     InsertionSort<int> iSort;
-    iSort.insertionsort(vec);
-    sorted = get<vector<int>>(iSort.get());
+
+    sorted = iSort(vec);
+    sortedLIST = iSort(LIST);
+    sortedArr = iSort(arr);
+    sortedLi = iSort(li);
 
     cout << "Result: " << endl;
     print(sorted);
 
     cout << "Selection sort section" << endl;
-
     SelectionSort<int> sSort;
-    sSort.selectionsort(vec);
-    sorted = get<vector<int>>(sSort.get());
+
+    sorted = sSort(vec);
+    sortedLIST = sSort(LIST);
+    sortedArr = sSort(arr);
+    sortedLi = sSort(li);
 
     cout << "Result: " << endl;
     print(sorted);
 
     cout << "Merge sort section" << endl;
-
     MergeSort<int> mSort;
-    mSort.mergesort(vec);
-    sorted = get<vector<int>>(mSort.get());
+
+    sorted = mSort(vec);
+    sortedLIST = mSort(LIST);
+    sortedArr = mSort(arr);
+    sortedLi = mSort(li);
 
     cout << "Result: " << endl;
     print(sorted);
 
     cout << "Quick sort section" << endl << endl;
-
     QuickSort<int> qSort;
-    qSort.quicksort(vec);
-    sorted = get<vector<int>>(qSort.get());
+
+    sorted = qSort(vec, 0, vec.size()-1);
+    sortedLIST = qSort(LIST, 0, LIST.size()-1);
+    sortedArr = qSort(arr, 0, arr.GetLen()-1);
+    sortedLi = qSort(li, 0, li.GetLen()-1);
 
     cout << "Result: " << endl;
     print(sorted);
-    */
-
-    //LinkedList
-
-
-    LinkedList<int> sample(vec);
-    bSort(sample);
-
-    //DynamicArray arr(vec);
-    //print(arr);
-
-    //LinkedList li(vec);
-    //print(li);
 
     return 0;
 }

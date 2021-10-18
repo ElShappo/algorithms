@@ -66,7 +66,7 @@ private:
 
     }
 
-    vector<T> sort(vector<T> & vec, int lower_bound, int upper_bound) override
+    vector<T> & sort(vector<T> & vec, int lower_bound, int upper_bound) override
     {
         // cout << "sort function entered " << endl;
 
@@ -90,28 +90,6 @@ private:
 
         }
         return vec;
-    }
-
-public:
-
-    quicksort(vector<T> vec)
-    {
-        *QuickSort::res_ = sort(vec, 0, vec.size()-1);
-    }
-
-    quicksort(list<T> vec)
-    {
-        this->res_ = sort(vector<T>(begin(vec), end(vec)), 0, vec.size()-1);
-    }
-
-    quicksort(DynamicArray<T> vec)
-    {
-        this->res_ = sort(get<vector<T>>(vec.to_vector() ), 0, vec.size()-1 );
-    }
-
-    quicksort(LinkedList<T> vec)
-    {
-        this->res_ = sort(get<list<T>>(vec.to_vector() ), 0, vec.size()-1 );
     }
 };
 

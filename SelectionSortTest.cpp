@@ -18,11 +18,8 @@ void print(vector<T> vec)
 template <typename T>
 vector<T> selectionSort(vector<T> vec)
 {
-    //print(vec);
-    SelectionSort<T> sort(vec);
-    vector<T> res = get<vector<T>>(sort.get());
-    //print(res);
-    return res;
+    SelectionSort<T> sort;
+    return sort(vec);
 }
 
 TEST_CASE("testing selectionSort [vector][int]", "[vector][int]")

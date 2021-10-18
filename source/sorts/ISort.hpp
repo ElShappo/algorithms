@@ -35,7 +35,26 @@ protected:
 
 public:
     virtual vector<T> & sort(vector<T> & var,  Ts ...) = 0;
-    virtual myVariant & get() {return *res_;}
+
+    vector<T> & operator()(vector<T> & vec, Ts ... ts)
+    {
+        return sort(vec, ts ...);
+    }
+
+    list<T> & operator()(list<T> & li, Ts ... ts)
+    {
+        return LinkedList<T>::to_list(sort(LinkedList<T>::to_vector(li), ts ... ) );
+    }
+
+    DynamicArray<T> & operator()(DynamicArray<T> & arr, Ts ... ts)
+    {
+        return DynamicArray<T>::to_array(sort(arr.to_vector(), ts ...) );
+    }
+
+    LinkedList<T> & operator()(LinkedList<T> & li, Ts ... ts)
+    {
+        return LinkedList<T>::to_linked_list(sort(li.to_vector(), ts ...) );
+    }
 
 
 };

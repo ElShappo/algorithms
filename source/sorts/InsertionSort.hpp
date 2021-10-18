@@ -10,7 +10,7 @@ class InsertionSort : public ISort<T> {
 
 private:
 
-    vector<T> sort(vector<T> & vec) override
+    vector<T> & sort(vector<T> & vec) override
     {
         T key;
 
@@ -29,28 +29,6 @@ private:
         }
 
         return vec;
-    }
-
-public:
-
-    insertionsort(vector<T> vec)
-    {
-        *InsertionSort::res_ = sort(vec);
-    }
-
-    insertionsort(list<T> vec)
-    {
-        this->res_ = sort(vector<T>(begin(vec), end(vec)));
-    }
-
-    insertionsort(DynamicArray<T> vec)
-    {
-        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
-    }
-
-    insertionsort(LinkedList<T> vec)
-    {
-        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
     }
 };
 

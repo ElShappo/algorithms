@@ -18,11 +18,8 @@ void print(vector<T> vec)
 template <typename T>
 vector<T> bubbleSort(vector<T> vec)
 {
-    //print(vec);
-    BubbleSort<T> sort(vec);
-    vector<T> res = get<vector<T>>(sort.get());
-    //print(res);
-    return res;
+    BubbleSort<T> sort;
+    return sort(vec);
 }
 
 TEST_CASE("testing bubbleSort [vector][int]", "[vector][int]")

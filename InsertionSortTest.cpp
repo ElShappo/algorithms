@@ -15,9 +15,8 @@ void print(vector<T> vec)
 template <typename T>
 vector<T> insertionSort(vector<T> vec)
 {
-    InsertionSort<T> sort(vec);
-    vector<T> res = get<vector<T>>(sort.get());
-    return res;
+    InsertionSort<T> sort;
+    return sort(vec);
 }
 
 

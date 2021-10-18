@@ -18,11 +18,8 @@ void print(vector<T> vec)
 template <typename T>
 vector<T> mergeSort(vector<T> vec)
 {
-    //print(vec);
-    MergeSort<T> sort(vec);
-    vector<T> res = get<vector<T>>(sort.get());
-    //print(res);
-    return res;
+    MergeSort<T> sort;
+    return sort(vec);
 }
 
 TEST_CASE("testing mergeSort [vector][int]", "[vector][int]")

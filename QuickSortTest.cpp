@@ -19,11 +19,8 @@ void print(vector<T> vec)
 template <typename T>
 vector<T> quickSort(vector<T> vec)
 {
-    //print(vec);
-    QuickSort<T> sort(vec);
-    vector<T> res = sort.get();
-    //print(res);
-    return res;
+    QuickSort<T> sort;
+    return sort(vec, 0, vec.size()-1);
 }
 
 TEST_CASE("testing quickSort [vector][int]", "[vector][int]")

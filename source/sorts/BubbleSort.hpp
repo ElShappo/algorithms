@@ -31,28 +31,6 @@ private:
         }
         return vec;
     }
-
-public:
-
-    vector<T> & operator()(vector<T> & vec)
-    {
-        return sort(vec);
-    }
-
-    list<T> & operator()(list<T> & li)
-    {
-        return LinkedList<T>::to_list(sort(LinkedList<T>::to_vector(li) ) );
-    }
-
-    DynamicArray<T> & operator()(DynamicArray<T> & arr)
-    {
-        return DynamicArray<T>::to_array(sort(arr.to_vector() ) );
-    }
-
-    LinkedList<T> & operator()(LinkedList<T> & li)
-    {
-        return LinkedList<T>::to_linked_list(sort(li.to_vector() ) );
-    }
 };
 
 #endif // BUBBLE_SORT_HPP

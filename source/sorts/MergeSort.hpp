@@ -36,7 +36,7 @@ private:
 
 
 
-    vector<T> merge(vector<T> vec1, vector<T> vec2)
+    vector<T> & merge(vector<T> vec1, vector<T> vec2)
     {
         //cout << "MERGE CALLED" << endl;
         //cout << "Left array inside merge: " << endl;
@@ -51,13 +51,13 @@ private:
         T iptr = vec1[0];
         T jptr = vec2[0];
 
-        vector<T> res;
+        vector<T>* res = new vector<T>();
 
         while (true)
         {
             T MIN = min(iptr, jptr);
             //cout << "MIN = " << MIN << endl;
-            res.push_back(MIN);
+            res->push_back(MIN);
             //cout << "State of res: " << endl;
             //this->print(res);
 
@@ -66,8 +66,8 @@ private:
                 if (i == vec1.size()-1)
                 // that means that there are only (bigger) numbers in the second vector which are left
                 {
-                    res.insert(res.end(), vec2.begin()+j, vec2.end());
-                    return res;
+                    res->insert(res->end(), vec2.begin()+j, vec2.end());
+                    return *res;
 
                 }
                 ++i;
@@ -78,8 +78,8 @@ private:
                 if (j == vec2.size()-1)
                 // that means that there are only (bigger) numbers in the first vector which are left
                 {
-                    res.insert(res.end(), vec1.begin()+i, vec1.end());
-                    return res;
+                    res->insert(res->end(), vec1.begin()+i, vec1.end());
+                    return *res;
 
                 }
                 ++j;
@@ -90,7 +90,7 @@ private:
     }
 
 
-    vector<T> sort(vector<T> & vec) override
+    vector<T> & sort(vector<T> & vec) override
     {
         //cout << "SORT CALLED" << endl;
         Partition parts(vec);
@@ -113,30 +113,6 @@ private:
         else
             return vec;
 
-    }
-
-
-public:
-
-    mergesort(vector<T> vec)
-    {
-        *MergeSort::res_ = sort(vec);
-    }
-
-    mergesort(list<T> li)
-    {
-        this->res_ = sort(vector<T>(begin(li), end(li)));
-        this->res_ = list<T>(begin(this->res_), end(this->res_));
-    }
-
-    mergesort(DynamicArray<T> arr)
-    {
-        this->res_ = sort(get<vector<T>>(arr.to_vector() ) );
-    }
-
-    mergesort(LinkedList<T> li)
-    {
-        this->res_ = sort(get<list<T>>(li.to_vector() ) );
     }
 };
 

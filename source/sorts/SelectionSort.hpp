@@ -49,7 +49,7 @@ private:
         return SelectionSort::IndexedElement(smallest, index);
     }
 
-    vector<T> sort(vector<T> & vec) override
+    vector<T> & sort(vector<T> & vec) override
     {
         if (vec.empty()) // no need to sort anything in this case
             return vec;
@@ -72,28 +72,6 @@ private:
                 swap(vec[index+i], vec[i]);
         }
         return vec;
-    }
-
-public:
-
-    selectionsort(vector<T> vec)
-    {
-        *SelectionSort::res_ = sort(vec);
-    }
-
-    selectionsort(list<T> vec)
-    {
-        this->res_ = sort(vector<T>(begin(vec), end(vec)));
-    }
-
-    selectionsort(DynamicArray<T> vec)
-    {
-        this->res_ = sort(get<vector<T>>(vec.to_vector() ) );
-    }
-
-    selectionsort(LinkedList<T> vec)
-    {
-        this->res_ = sort(get<list<T>>(vec.to_vector() ) );
     }
 };
 

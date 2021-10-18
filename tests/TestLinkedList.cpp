@@ -334,7 +334,7 @@ TEST_CASE("Testing copy ctor from list and casting to list [LiLi]")
     REQUIRE(li.GetLen() == SIZE);
     //print(li);
 
-    list<int> LIST(li.to_list());
-    REQUIRE(LIST.size() == SIZE);
+    //list<int> LIST(li.to_list());
+    //REQUIRE(LIST.size() == SIZE);
 
 }
