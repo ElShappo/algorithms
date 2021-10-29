@@ -135,7 +135,9 @@ public:
     }
 };
 
+template<int low = -1000000, int high = 1000000>
 class PreparedConsole
+// test for 10, 100, 1000, 10000, 20000 and 40000 elements respectively
 {
 private:
     vector<int> bArrDurations; // list of durations collected from BubbleSort for DynamicArray
@@ -175,9 +177,6 @@ public:
         int amount_10000 = 10000;
         int amount_20000 = 20000;
         int amount_40000 = 40000;
-
-        int low = -1000000;
-        int high = 1000000;
 
         const Sorts bSort = Sorts::BubbleSort;
         Test<int, bSort> bTest;

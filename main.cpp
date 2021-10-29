@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <chrono>
+#include <regex>
+#include <optional>
 
 #include "MergeSort.hpp"
 #include "BubbleSort.hpp"
@@ -27,23 +29,114 @@ using namespace std;
 using namespace std::chrono;
 using bprinter::TablePrinter;
 
-class UserConsole
+vector<int> restrictedVectorCin(optional<int> repetitions = optional<int>(), bool requirePositive = false, vector<int> permittedValues = vector<int>())
+{
+    vector<int> res;
+    string buffer;
+    char ch;
+
+    while (true)
+    {
+        while ((ch = getchar() ) != '\n')
+            buffer.push_back(ch);
+
+        cin.clear();
+
+        regex reg("^(-*[0-9])+( -*[0-9]+)*$");
+
+        if (!regex_match(buffer, reg) )
+        {
+            cout << "Invalid input. Please, retype" << endl << endl;
+            buffer.erase(buffer.begin(), buffer.end());
+            res.erase(res.begin(), res.end());
+            continue;
+        }
+
+        for (int i=0; i<buffer.size(); ++i)
+        {
+            string buff;
+            while (buffer[i] != ' ')
+            {
+                buff.push_back(buffer[i]);
+                ++i;
+            }
+            res.push_back(stoi(buff));
+        }
+        if (repetitions.has_value())
+        {
+            if (res.size() != repetitions.value())
+            {
+                cout << "Invalid input. Please, retype" << endl << endl;
+                buffer.erase(buffer.begin(), buffer.end());
+                res.erase(res.begin(), res.end());
+                continue;
+            }
+        }
+
+        bool isNested = false;
+
+        for (auto it1 : res)
+        {
+            bool match = false;
+
+            if (permittedValues.empty())
+                match = true;
+
+            for (auto it2 : permittedValues)
+            {
+                if (it1 == it2)
+                    match = true;
+            }
+            if (!match || (it1 < 0 && requirePositive) )
+            {
+                isNested = true;
+                cout << "Invalid input. Please, retype" << endl << endl;
+                buffer.erase(buffer.begin(), buffer.end());
+                res.erase(res.begin(), res.end());
+                break;
+            }
+        }
+
+        if (isNested)
+            continue;
+
+        break;
+    }
+
+    //cout << "Result of restrictedVectorCin: "; print(res);
+    return res;
+}
+
+class Console
 {
 public:
-    UserConsole()
+    enum Type
+    {
+        linkedList=1,
+        dynamicArray=2,
+    };
+
+    enum Input
+    {
+        Manual=1,
+        Random=2,
+
+    };
+
+    Console()
     {
         UdGenerator<int> gen;
 
         std::random_device rd;  // Will be used to obtain a seed for the random number engine
         std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
 
-        int datatype = -1;
-        int sort = -1;
-        int mode = -1;
-        string buffer;
-        vector<int> converted;
-        int amount = 1;
+        int type; // DynamicArr or LinkedList
+        int sort; // One of 5 sorts
+        int inputType; // Manual or Random
+        vector<int> toSort;
 
+        int amount;
+        vector<int> minMax;
 
         DynamicArray<int> sortedArr;
         LinkedList<int> sortedLi;
@@ -56,14 +149,15 @@ public:
 
         while (true)
         {
+            toSort.erase(toSort.begin(), toSort.end());
+            minMax.erase(minMax.begin(), minMax.end());
+
             cout << "Choose the desired datatype: " << endl << endl;
             cout << "1. LinkedList" << endl;
             cout << "2. DynamicArray" << endl << endl;
             cout << "Enter: ";
 
-            cin >> datatype;
-            std::cin.ignore(32767, '\n');
-
+            type = restrictedVectorCin(1, true, {1,2})[0];
             cout << endl;
 
             cout << "Choose the desired sort: " << endl << endl;
@@ -74,9 +168,7 @@ public:
             cout << "5. SelectionSort" << endl << endl;
             cout << "Enter: ";
 
-            cin >> sort;
-            std::cin.ignore(32767, '\n');
-
+            sort = restrictedVectorCin(1, true, {1,2,3,4,5})[0];
             cout << endl;
 
             cout << "Choose how to enter data: " << endl << endl;
@@ -84,53 +176,46 @@ public:
             cout << "2. Randomly" << endl << endl;
             cout << "Enter: ";
 
-            cin >> mode;
-            std::cin.ignore(32767, '\n');
-
+            inputType = restrictedVectorCin(1, true, {1,2})[0];
             cout << endl;
 
-            switch (mode)
+            switch (inputType)
             {
-                case 1:
+                case Input::Manual:
 
-                    getline(cin, buffer);
-                    converted = parse(buffer);
+                    cout << "Enter the numbers through whitespaces: " << endl;
+                    toSort = restrictedVectorCin();
                     break;
 
-                case 2:
+                case Input::Random:
 
                     cout << "Amount of numbers: ";
-                    cin >> amount;
-                    std::cin.ignore(32767, '\n');
-                    cout << endl << endl;
-                    cout << "Range [min max]: ";
+                    amount = restrictedVectorCin(1, true)[0];
+                    cout << endl;
+                    cout << "Range (from min to max through whitespace): ";
 
-                    getline(cin, buffer);
-                    converted = parse(buffer);
+                    minMax = restrictedVectorCin(2);
 
                     int MIN, MAX;
 
-                    MIN = min(converted[0], converted[1]);
-                    MAX = max(converted[0], converted[1]);
-
-                    converted.clear();
+                    MIN = min(minMax[0], minMax[1]);
+                    MAX = max(minMax[0], minMax[1]);
 
                     for (int i=0; i<amount; ++i)
-                        converted.push_back(gen(MIN, MAX, generator));
+                        toSort.push_back(gen(MIN, MAX, generator));
 
-                    break;
-
-                default:
                     break;
             }
 
-            DynamicArray<int> arr(converted);
-            LinkedList<int> li(converted);
+            DynamicArray<int> arr(toSort);
+            LinkedList<int> li(toSort);
+
+            print(arr);
 
             auto start = high_resolution_clock::now();
-            switch (datatype)
+            switch (type)
             {
-                case 1:
+                case Type::linkedList:
 
                     switch (sort)
                     {
@@ -153,12 +238,9 @@ public:
                         case 5:
                             sortedLi = sSort(li);
                             break;
-
-                        default:
-                            break;
                     }
 
-                case 2:
+                case Type::dynamicArray:
 
                     switch (sort)
                     {
@@ -181,42 +263,36 @@ public:
                         case 5:
                             sortedArr = sSort(arr);
                             break;
-
-                        default:
-                            break;
                     }
-
-                default:
-                    break;
-
             }
+
             auto stop = high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(stop - start);
             cout << "Time taken by function: "
              << duration.count() << " microseconds" << endl;
 
-            if (amount <= 5000)
+            if (amount <= 1000)
             {
                 TablePrinter tp(&std::cout);
                 tp.AddColumn("Index", 5);
                 tp.AddColumn("Unsorted", 10);
                 tp.AddColumn("Sorted", 10);
 
-                if (datatype == 1)
+                if (type == Type::linkedList)
                 {
                     tp.PrintHeader();
 
-                    for (unsigned int i=0; i<converted.size(); ++i)
-                        tp << i << converted[i] << sortedLi[i];
+                    for (unsigned int i=0; i<toSort.size(); ++i)
+                        tp << i << toSort[i] << sortedLi[i];
 
                     tp.PrintFooter();
                 }
-                else if (datatype == 2)
+                else if (type == Type::dynamicArray)
                 {
                     tp.PrintHeader();
 
-                    for (unsigned int i=0; i<converted.size(); ++i)
-                        tp << i << converted[i] << sortedArr[i];
+                    for (unsigned int i=0; i<toSort.size(); ++i)
+                        tp << i << toSort[i] << sortedArr[i];
 
                     tp.PrintFooter();
                 }
@@ -227,6 +303,6 @@ public:
 
 int main()
 {
-    UserConsole console;
+    Console console;
     return 0;
 }

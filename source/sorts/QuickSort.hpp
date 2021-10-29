@@ -54,7 +54,7 @@ private:
 
     vector<T> & sort(vector<T> & vec, int lower_bound, int upper_bound) override
     {
-        quickSort(vec, 0, vec.size());
+        quickSort(vec, 0, vec.size()-1);
         return vec;
     }
 };

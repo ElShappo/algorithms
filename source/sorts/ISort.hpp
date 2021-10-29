@@ -8,7 +8,7 @@
 
 #include "DynamicArray.hpp"
 #include "LinkedList.hpp"
-#include "../../ListOfSorts.hpp"
+#include "../ListOfSorts.hpp"
 
 #define myVariant variant<vector<T>, list<T>, DynamicArray<T>, LinkedList<T>>
 
