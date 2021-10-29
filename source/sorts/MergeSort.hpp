@@ -7,6 +7,8 @@ using namespace std;
 
 template <typename T>
 class MergeSort : public ISort<T> {
+public:
+    MergeSort() {this->sortName_ = __func__;}
 
 private:
 

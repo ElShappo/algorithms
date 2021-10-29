@@ -8,6 +8,7 @@
 
 #include "DynamicArray.hpp"
 #include "LinkedList.hpp"
+#include "../../ListOfSorts.hpp"
 
 #define myVariant variant<vector<T>, list<T>, DynamicArray<T>, LinkedList<T>>
 
@@ -19,6 +20,7 @@ class ISort {
 protected:
 
     myVariant* res_ = new myVariant();
+    string sortName_;
 
     enum class Order
     {
@@ -32,6 +34,8 @@ protected:
             cout << it << endl;
         cout << endl;
     }
+
+
 
 public:
     virtual vector<T> & sort(vector<T> & var,  Ts ...) = 0;
@@ -54,6 +58,11 @@ public:
     LinkedList<T> & operator()(LinkedList<T> & li, Ts ... ts)
     {
         return LinkedList<T>::to_linked_list(sort(li.to_vector(), ts ...) );
+    }
+
+    string getSortName()
+    {
+        return sortName_;
     }
 
 

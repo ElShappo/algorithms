@@ -92,7 +92,7 @@ public:
     {
         LinkedList<T>* li = new LinkedList<T>();
 
-        for (int i=0; i<vec.size(); ++i)
+        for (unsigned int i=0; i<vec.size(); ++i)
             li->PushBack(vec[i]);
 
         return *li;
