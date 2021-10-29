@@ -54,6 +54,7 @@ enum class Sorts
     MergeSort,
     QuickSort,
     SelectionSort,
+    CountingSort,
 };
 
 enum class EnablePrint

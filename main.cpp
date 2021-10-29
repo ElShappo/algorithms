@@ -11,6 +11,7 @@
 #include "InsertionSort.hpp"
 #include "SelectionSort.hpp"
 #include "QuickSort.hpp"
+#include "CountingSort.hpp"
 
 #include "DynamicArray.hpp"
 #include "LinkedList.hpp"
@@ -102,8 +103,6 @@ vector<int> restrictedVectorCin(optional<int> repetitions = optional<int>(), boo
 
         break;
     }
-
-    //cout << "Result of restrictedVectorCin: "; print(res);
     return res;
 }
 
@@ -146,6 +145,7 @@ public:
         MergeSort<int> mSort;
         QuickSort<int> qSort;
         SelectionSort<int> sSort;
+        CountingSort cSort;
 
         while (true)
         {
@@ -165,10 +165,11 @@ public:
             cout << "2. InsertionSort" << endl;
             cout << "3. MergeSort" << endl;
             cout << "4. QuickSort" << endl;
-            cout << "5. SelectionSort" << endl << endl;
+            cout << "5. SelectionSort" << endl;
+            cout << "6. CountingSort" << endl << endl;
             cout << "Enter: ";
 
-            sort = restrictedVectorCin(1, true, {1,2,3,4,5})[0];
+            sort = restrictedVectorCin(1, true, {1,2,3,4,5,6})[0];
             cout << endl;
 
             cout << "Choose how to enter data: " << endl << endl;
@@ -210,7 +211,8 @@ public:
             DynamicArray<int> arr(toSort);
             LinkedList<int> li(toSort);
 
-            print(arr);
+            if (amount <= 1000)
+                print(arr);
 
             auto start = high_resolution_clock::now();
             switch (type)
@@ -238,6 +240,10 @@ public:
                         case 5:
                             sortedLi = sSort(li);
                             break;
+
+                        case 6:
+                            sortedLi = cSort(li);
+                            break;
                     }
 
                 case Type::dynamicArray:
@@ -262,6 +268,10 @@ public:
 
                         case 5:
                             sortedArr = sSort(arr);
+                            break;
+
+                        case 6:
+                            sortedArr = cSort(arr);
                             break;
                     }
             }

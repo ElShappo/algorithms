@@ -9,6 +9,7 @@
 #include "InsertionSort.hpp"
 #include "SelectionSort.hpp"
 #include "QuickSort.hpp"
+#include "CountingSort.hpp"
 
 #include "DynamicArray.hpp"
 #include "LinkedList.hpp"
@@ -56,6 +57,7 @@ public:
         MergeSort<int> mSort;
         QuickSort<int> qSort;
         SelectionSort<int> sSort;
+        CountingSort cSort;
 
         DynamicArray<int> arr(random);
         LinkedList<int> li(random);
@@ -83,6 +85,8 @@ public:
             sortedArr = qSort(arr, 0, arr.GetLen()-1);
         else if (sorts == Sorts::SelectionSort)
             sortedArr = sSort(arr);
+        else if (sorts == Sorts::CountingSort)
+            sortedArr = cSort(arr);
 
         auto stop1 = high_resolution_clock::now();
         auto start2 = high_resolution_clock::now();
@@ -97,6 +101,8 @@ public:
             sortedLi = qSort(li, 0, li.GetLen()-1);
         else if (sorts == Sorts::SelectionSort)
             sortedLi = sSort(li);
+        else if (sorts == Sorts::CountingSort)
+            sortedLi = cSort(li);
 
         auto stop2 = high_resolution_clock::now();
 
@@ -155,6 +161,9 @@ private:
     vector<int> sArrDurations; // list of durations collected from SelectionSort for DynamicArray
     vector<int> sLiDurations; // list of durations collected from SelectionSort for LinkedList
 
+    vector<int> cArrDurations; // list of durations collected from SelectionSort for DynamicArray
+    vector<int> cLiDurations; // list of durations collected from SelectionSort for LinkedList
+
 public:
 
     auto getBArrDurations() {return bArrDurations;}
@@ -162,12 +171,14 @@ public:
     auto getMArrDurations() {return mArrDurations;}
     auto getQArrDurations() {return qArrDurations;}
     auto getSArrDurations() {return sArrDurations;}
+    auto getCArrDurations() {return cArrDurations;}
 
     auto getBLiDurations() {return bLiDurations;}
     auto getILiDurations() {return iLiDurations;}
     auto getMLiDurations() {return mLiDurations;}
     auto getQLiDurations() {return qLiDurations;}
     auto getSLiDurations() {return sLiDurations;}
+    auto getCLiDurations() {return cLiDurations;}
 
     PreparedConsole()
     {
@@ -213,11 +224,13 @@ public:
         cout << endl;
 
 
+        /*
         cout << "BubbleSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
         buffer = bTest(amount_40000, low, high, EnablePrint::onlyDuration);
         bArrDurations.push_back(buffer.first);
         bLiDurations.push_back(buffer.second);
         cout << endl;
+        */
 
 
 
@@ -258,11 +271,13 @@ public:
         iLiDurations.push_back(buffer.second);
         cout << endl;
 
+        /*
         cout << "InsertionSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
         buffer = iTest(amount_40000, low, high, EnablePrint::onlyDuration);
         iArrDurations.push_back(buffer.first);
         iLiDurations.push_back(buffer.second);
         cout << endl;
+        */
 
 
 
@@ -303,11 +318,13 @@ public:
         mLiDurations.push_back(buffer.second);
         cout << endl;
 
+        /*
         cout << "MergeSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
         buffer = mTest(amount_40000, low, high, EnablePrint::onlyDuration);
         mArrDurations.push_back(buffer.first);
         mLiDurations.push_back(buffer.second);
         cout << endl;
+        */
 
 
 
@@ -348,11 +365,13 @@ public:
         qLiDurations.push_back(buffer.second);
         cout << endl;
 
+        /*
         cout << "QuickSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
         buffer = qTest(amount_40000, low, high, EnablePrint::onlyDuration);
         qArrDurations.push_back(buffer.first);
         qLiDurations.push_back(buffer.second);
         cout << endl;
+        */
 
 
 
@@ -393,29 +412,83 @@ public:
         sLiDurations.push_back(buffer.second);
         cout << endl;
 
+
+        /*
         cout << "SelectionSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
         buffer = sTest(amount_40000, low, high, EnablePrint::onlyDuration);
         sArrDurations.push_back(buffer.first);
         sLiDurations.push_back(buffer.second);
         cout << endl;
+        */
+
+
+
+        // -------------------------------------------------------------------------------------------------------------
+
+
+
+        const Sorts cSort = Sorts::CountingSort;
+        Test<int, cSort> cTest;
+
+        cout << "CountingSort, " << amount_10 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = cTest(amount_10, low, high);
+        cArrDurations.push_back(buffer.first);
+        cLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "CountingSort, " << amount_100 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = cTest(amount_100, low, high);
+        cArrDurations.push_back(buffer.first);
+        cLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "CountingSort, " << amount_1000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = cTest(amount_1000, low, high);
+        cArrDurations.push_back(buffer.first);
+        cLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "CountingSort, " << amount_10000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = cTest(amount_10000, low, high, EnablePrint::onlyDuration);
+        cArrDurations.push_back(buffer.first);
+        cLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "CountingSort, " << amount_20000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = cTest(amount_20000, low, high, EnablePrint::onlyDuration);
+        cArrDurations.push_back(buffer.first);
+        cLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        /*
+
+        cout << "CountingSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = cTest(amount_40000, low, high, EnablePrint::onlyDuration);
+        cArrDurations.push_back(buffer.first);
+        cLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        */
     }
 };
 
 int main()
 {
-    PreparedConsole console;
+    PreparedConsole<-100, 100> console;
 
     auto bArrDurations = console.getBArrDurations();
     auto iArrDurations = console.getIArrDurations();
     auto mArrDurations = console.getMArrDurations();
     auto qArrDurations = console.getQArrDurations();
     auto sArrDurations = console.getSArrDurations();
+    auto cArrDurations = console.getCArrDurations();
 
     auto bLiDurations = console.getBLiDurations();
     auto iLiDurations = console.getILiDurations();
     auto mLiDurations = console.getMLiDurations();
     auto qLiDurations = console.getQLiDurations();
     auto sLiDurations = console.getSLiDurations();
+    auto cLiDurations = console.getCLiDurations();
 
     TablePrinter tp(&std::cout);
     tp.AddColumn("elements", 15);
@@ -424,13 +497,14 @@ int main()
     tp.AddColumn("MergeSort", 15);
     tp.AddColumn("QuickSort", 15);
     tp.AddColumn("SelectionSort", 15);
+    tp.AddColumn("CountingSort", 15);
 
     vector<int> elements = {10, 100, 1000, 10000, 20000, 40000};
 
     cout << "Sorts execution time (microseconds) for DynamicArray" << endl;
     tp.PrintHeader();
     for (int i=0; i<6; ++i)
-        tp << elements[i] << bArrDurations[i] << iArrDurations[i] << mArrDurations[i] << qArrDurations[i] << sArrDurations[i];
+        tp << elements[i] << bArrDurations[i] << iArrDurations[i] << mArrDurations[i] << qArrDurations[i] << sArrDurations[i] << cArrDurations[i];
     tp.PrintFooter();
 
     cout << endl;
@@ -438,7 +512,7 @@ int main()
     cout << "Sorts execution time (microseconds) for LinkedList" << endl;
     tp.PrintHeader();
     for (int i=0; i<6; ++i)
-        tp << elements[i] << bLiDurations[i] << iLiDurations[i] << mLiDurations[i] << qLiDurations[i] << sLiDurations[i];
+        tp << elements[i] << bLiDurations[i] << iLiDurations[i] << mLiDurations[i] << qLiDurations[i] << sLiDurations[i] << cLiDurations[i];
     tp.PrintFooter();
 
     vector<int> x = {10, 100, 1000, 10000, 20000, 40000};
@@ -459,6 +533,7 @@ int main()
     arrPlot.drawCurve(x, mArrDurations).label("MergeSort [DynamicArr]");
     arrPlot.drawCurve(x, qArrDurations).label("QuickSort [DynamicArr]");
     arrPlot.drawCurve(x, sArrDurations).label("SelectionSort [DynamicArr]");
+    arrPlot.drawCurve(x, cArrDurations).label("CountingSort [DynamicArr]");
 
 
     // -------------------------------------------------------------------------------------------------------------
@@ -480,6 +555,7 @@ int main()
     liPlot.drawCurve(x, mLiDurations).label("MergeSort [LinkedList]");
     liPlot.drawCurve(x, qLiDurations).label("QuickSort [LinkedList]");
     liPlot.drawCurve(x, sLiDurations).label("SelectionSort [LinkedList]");
+    liPlot.drawCurve(x, cLiDurations).label("CountingSort [LinkedList]");
 
 
     // -------------------------------------------------------------------------------------------------------------
