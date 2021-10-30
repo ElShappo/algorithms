@@ -10,6 +10,7 @@
 #include "SelectionSort.hpp"
 #include "QuickSort.hpp"
 #include "CountingSort.hpp"
+#include "ShellSort.hpp"
 
 #include "DynamicArray.hpp"
 #include "LinkedList.hpp"
@@ -58,6 +59,7 @@ public:
         QuickSort<int> qSort;
         SelectionSort<int> sSort;
         CountingSort cSort;
+        ShellSort<int> shSort;
 
         DynamicArray<int> arr(random);
         LinkedList<int> li(random);
@@ -87,6 +89,8 @@ public:
             sortedArr = sSort(arr);
         else if (sorts == Sorts::CountingSort)
             sortedArr = cSort(arr);
+        else if (sorts == Sorts::ShellSort)
+            sortedArr = shSort(arr);
 
         auto stop1 = high_resolution_clock::now();
         auto start2 = high_resolution_clock::now();
@@ -103,6 +107,8 @@ public:
             sortedLi = sSort(li);
         else if (sorts == Sorts::CountingSort)
             sortedLi = cSort(li);
+        else if (sorts == Sorts::ShellSort)
+            sortedLi = shSort(li);
 
         auto stop2 = high_resolution_clock::now();
 
@@ -164,6 +170,9 @@ private:
     vector<int> cArrDurations; // list of durations collected from SelectionSort for DynamicArray
     vector<int> cLiDurations; // list of durations collected from SelectionSort for LinkedList
 
+    vector<int> shArrDurations; // list of durations collected from SelectionSort for DynamicArray
+    vector<int> shLiDurations; // list of durations collected from SelectionSort for LinkedList
+
 public:
 
     auto getBArrDurations() {return bArrDurations;}
@@ -172,6 +181,7 @@ public:
     auto getQArrDurations() {return qArrDurations;}
     auto getSArrDurations() {return sArrDurations;}
     auto getCArrDurations() {return cArrDurations;}
+    auto getSHArrDurations() {return shArrDurations;}
 
     auto getBLiDurations() {return bLiDurations;}
     auto getILiDurations() {return iLiDurations;}
@@ -179,6 +189,7 @@ public:
     auto getQLiDurations() {return qLiDurations;}
     auto getSLiDurations() {return sLiDurations;}
     auto getCLiDurations() {return cLiDurations;}
+    auto getSHLiDurations() {return shLiDurations;}
 
     PreparedConsole()
     {
@@ -469,6 +480,54 @@ public:
         cout << endl;
 
         */
+
+
+        // -------------------------------------------------------------------------------------------------------------
+
+
+
+        const Sorts shSort = Sorts::ShellSort;
+        Test<int, shSort> shTest;
+
+        cout << "ShellSort, " << amount_10 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = shTest(amount_10, low, high);
+        shArrDurations.push_back(buffer.first);
+        shLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "ShellSort, " << amount_100 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = shTest(amount_100, low, high);
+        shArrDurations.push_back(buffer.first);
+        shLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "ShellSort, " << amount_1000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = shTest(amount_1000, low, high);
+        shArrDurations.push_back(buffer.first);
+        shLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "ShellSort, " << amount_10000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = shTest(amount_10000, low, high, EnablePrint::onlyDuration);
+        shArrDurations.push_back(buffer.first);
+        shLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        cout << "ShellSort, " << amount_20000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = shTest(amount_20000, low, high, EnablePrint::onlyDuration);
+        shArrDurations.push_back(buffer.first);
+        shLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        /*
+
+        cout << "ShellSort, " << amount_40000 << " elements; " << "range [" << low << "; " << high << "]" << endl;
+        buffer = shTest(amount_40000, low, high, EnablePrint::onlyDuration);
+        shArrDurations.push_back(buffer.first);
+        shLiDurations.push_back(buffer.second);
+        cout << endl;
+
+        */
     }
 };
 
@@ -482,6 +541,7 @@ int main()
     auto qArrDurations = console.getQArrDurations();
     auto sArrDurations = console.getSArrDurations();
     auto cArrDurations = console.getCArrDurations();
+    auto shArrDurations = console.getSHArrDurations();
 
     auto bLiDurations = console.getBLiDurations();
     auto iLiDurations = console.getILiDurations();
@@ -489,6 +549,7 @@ int main()
     auto qLiDurations = console.getQLiDurations();
     auto sLiDurations = console.getSLiDurations();
     auto cLiDurations = console.getCLiDurations();
+    auto shLiDurations = console.getSHLiDurations();
 
     TablePrinter tp(&std::cout);
     tp.AddColumn("elements", 15);
@@ -498,13 +559,14 @@ int main()
     tp.AddColumn("QuickSort", 15);
     tp.AddColumn("SelectionSort", 15);
     tp.AddColumn("CountingSort", 15);
+    tp.AddColumn("ShellSort", 15);
 
     vector<int> elements = {10, 100, 1000, 10000, 20000, 40000};
 
     cout << "Sorts execution time (microseconds) for DynamicArray" << endl;
     tp.PrintHeader();
     for (int i=0; i<6; ++i)
-        tp << elements[i] << bArrDurations[i] << iArrDurations[i] << mArrDurations[i] << qArrDurations[i] << sArrDurations[i] << cArrDurations[i];
+        tp << elements[i] << bArrDurations[i] << iArrDurations[i] << mArrDurations[i] << qArrDurations[i] << sArrDurations[i] << cArrDurations[i] << shArrDurations[i];
     tp.PrintFooter();
 
     cout << endl;
@@ -512,7 +574,7 @@ int main()
     cout << "Sorts execution time (microseconds) for LinkedList" << endl;
     tp.PrintHeader();
     for (int i=0; i<6; ++i)
-        tp << elements[i] << bLiDurations[i] << iLiDurations[i] << mLiDurations[i] << qLiDurations[i] << sLiDurations[i] << cLiDurations[i];
+        tp << elements[i] << bLiDurations[i] << iLiDurations[i] << mLiDurations[i] << qLiDurations[i] << sLiDurations[i] << cLiDurations[i] << shLiDurations[i];
     tp.PrintFooter();
 
     vector<int> x = {10, 100, 1000, 10000, 20000, 40000};
@@ -534,6 +596,7 @@ int main()
     arrPlot.drawCurve(x, qArrDurations).label("QuickSort [DynamicArr]");
     arrPlot.drawCurve(x, sArrDurations).label("SelectionSort [DynamicArr]");
     arrPlot.drawCurve(x, cArrDurations).label("CountingSort [DynamicArr]");
+    arrPlot.drawCurve(x, shArrDurations).label("ShellSort [DynamicArr]");
 
 
     // -------------------------------------------------------------------------------------------------------------
@@ -556,6 +619,7 @@ int main()
     liPlot.drawCurve(x, qLiDurations).label("QuickSort [LinkedList]");
     liPlot.drawCurve(x, sLiDurations).label("SelectionSort [LinkedList]");
     liPlot.drawCurve(x, cLiDurations).label("CountingSort [LinkedList]");
+    liPlot.drawCurve(x, shLiDurations).label("ShellSort [LinkedList]");
 
 
     // -------------------------------------------------------------------------------------------------------------

@@ -1,3 +1,6 @@
+#ifndef AUXILIARY_HPP
+#define AUXILIARY_HPP
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -55,6 +58,7 @@ enum class Sorts
     QuickSort,
     SelectionSort,
     CountingSort,
+    ShellSort,
 };
 
 enum class EnablePrint
@@ -63,3 +67,5 @@ enum class EnablePrint
     onlyDuration,
     enabled,
 };
+
+#endif // AUXILIARY_HPP
