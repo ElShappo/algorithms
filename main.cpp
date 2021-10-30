@@ -192,6 +192,8 @@ public:
 
                     cout << "Enter the numbers through whitespaces: " << endl;
                     toSort = restrictedVectorCin();
+                    amount = toSort.size();
+                    cout << endl;
                     break;
 
                 case Input::Random:
@@ -217,7 +219,7 @@ public:
             DynamicArray<int> arr(toSort);
             LinkedList<int> li(toSort);
 
-            if (amount <= 1000)
+            if (amount <= 1000 && inputType == Input::Random)
                 print(arr);
 
             auto start = high_resolution_clock::now();

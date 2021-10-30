@@ -35,10 +35,10 @@ protected:
         cout << endl;
     }
 
+    virtual vector<T> & sort(vector<T> & var,  Ts ...) = 0;
 
 
 public:
-    virtual vector<T> & sort(vector<T> & var,  Ts ...) = 0;
 
     vector<T> & operator()(vector<T> & vec, Ts ... ts)
     {

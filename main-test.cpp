@@ -209,7 +209,7 @@ public:
         int amount_1000 = 1000;
         int amount_10000 = 10000;
         int amount_20000 = 20000;
-        int amount_40000 = 40000;
+        //int amount_40000 = 40000;
 
         const Sorts bSort = Sorts::BubbleSort;
         Test<int, bSort> bTest;
@@ -624,11 +624,11 @@ int main()
     tp.AddColumn("ShellSort", 15);
     tp.AddColumn("HeapSort", 15);
 
-    vector<int> elements = {10, 100, 1000, 10000, 20000, 40000};
+    vector<int> elements = {10, 100, 1000, 10000, 20000, /*40000*/};
 
     cout << "Sorts execution time (microseconds) for DynamicArray" << endl;
     tp.PrintHeader();
-    for (int i=0; i<6; ++i)
+    for (int i=0; i<elements.size(); ++i)
         tp << elements[i] << bArrDurations[i] << iArrDurations[i] << mArrDurations[i] << qArrDurations[i] << sArrDurations[i] << cArrDurations[i] << shArrDurations[i] << hArrDurations[i];
     tp.PrintFooter();
 
@@ -636,11 +636,11 @@ int main()
 
     cout << "Sorts execution time (microseconds) for LinkedList" << endl;
     tp.PrintHeader();
-    for (int i=0; i<6; ++i)
+    for (int i=0; i<elements.size(); ++i)
         tp << elements[i] << bLiDurations[i] << iLiDurations[i] << mLiDurations[i] << qLiDurations[i] << sLiDurations[i] << cLiDurations[i] << shLiDurations[i] << hLiDurations[i];
     tp.PrintFooter();
 
-    vector<int> x = {10, 100, 1000, 10000, 20000, 40000};
+    vector<int> x = {10, 100, 1000, 10000, 20000, /*40000*/};
 
     Plot arrPlot;
 
