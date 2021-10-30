@@ -7,3 +7,5 @@ bin/
 .objs/
 *.cbp
 *.pdf
+*.dat
+*.plt

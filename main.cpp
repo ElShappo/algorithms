@@ -219,8 +219,8 @@ public:
             DynamicArray<int> arr(toSort);
             LinkedList<int> li(toSort);
 
-            if (amount <= 1000 && inputType == Input::Random)
-                print(arr);
+            //if (amount <= 1000 && inputType == Input::Random)
+                //print(arr);
 
             auto start = high_resolution_clock::now();
             switch (type)
