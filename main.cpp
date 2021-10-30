@@ -13,6 +13,7 @@
 #include "QuickSort.hpp"
 #include "CountingSort.hpp"
 #include "ShellSort.hpp"
+#include "HeapSort.hpp"
 
 #include "DynamicArray.hpp"
 #include "LinkedList.hpp"
@@ -148,6 +149,7 @@ public:
         SelectionSort<int> sSort;
         CountingSort cSort;
         ShellSort<int> shSort;
+        HeapSort<int> hSort;
 
         while (true)
         {
@@ -169,10 +171,11 @@ public:
             cout << "4. QuickSort" << endl;
             cout << "5. SelectionSort" << endl;
             cout << "6. CountingSort" << endl;
-            cout << "7. ShellSort" << endl << endl;
+            cout << "7. ShellSort" << endl;
+            cout << "8. HeapSort" << endl << endl;
             cout << "Enter: ";
 
-            sort = restrictedVectorCin(1, true, {1,2,3,4,5,6,7})[0];
+            sort = restrictedVectorCin(1, true, {1,2,3,4,5,6,7,8})[0];
             cout << endl;
 
             cout << "Choose how to enter data: " << endl << endl;
@@ -251,6 +254,10 @@ public:
                         case 7:
                             sortedLi = shSort(li);
                             break;
+
+                        case 8:
+                            sortedLi = hSort(li);
+                            break;
                     }
 
                 case Type::dynamicArray:
@@ -283,6 +290,10 @@ public:
 
                         case 7:
                             sortedArr = shSort(arr);
+                            break;
+
+                        case 8:
+                            sortedArr = hSort(arr);
                             break;
                     }
             }

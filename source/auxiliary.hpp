@@ -59,6 +59,7 @@ enum class Sorts
     SelectionSort,
     CountingSort,
     ShellSort,
+    HeapSort,
 };
 
 enum class EnablePrint
